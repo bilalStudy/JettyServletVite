@@ -55,6 +55,7 @@ public class WebshopServerTest {
     void shouldAddCartItems() throws IOException {
         var postConnection = openConnection("/api/books");
         postConnection.setRequestMethod("POST");
+        postConnection.setDoOutput(true);
         postConnection.getOutputStream().write(
                 Json.createObjectBuilder()
                         .add("itemName", "Example ItemName")
