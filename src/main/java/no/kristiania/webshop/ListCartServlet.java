@@ -10,16 +10,22 @@ import java.util.List;
 
 public class ListCartServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        var cartItem = new CartItem();
-        cartItem.setItemName("bread");
-        cartItem.setPrice(100);
+        var exampleCartItem = new CartItem();
+        exampleCartItem.setItemName("bread");
+        exampleCartItem.setPrice(100);
 
-        var cartItems = List.of(cartItem);
+        var cartItems = List.of(exampleCartItem);
 
-
-        resp.getWriter().println("[{\"title\":\"Java Webshop\"}]");
+        resp.getWriter().write("[");
+        for (CartItem cartItem : cartItems) {
+            resp.getWriter().write("{");
+            resp.getWriter().write("\"itemName\":\"" + cartItem.getItemName() + "\"");
+            resp.getWriter().write("\"price\":\"" + cartItem.getPrice() + "\"");
+            resp.getWriter().write("}");
+        }
+        resp.getWriter().write("]");
 
     }
 }
