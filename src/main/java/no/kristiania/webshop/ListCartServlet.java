@@ -1,5 +1,7 @@
 package no.kristiania.webshop;
 
+import jakarta.json.Json;
+import jakarta.json.JsonArrayBuilder;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,14 +20,22 @@ public class ListCartServlet extends HttpServlet {
 
         var cartItems = List.of(exampleCartItem);
 
+        JsonArrayBuilder result = Json.createArrayBuilder();
         resp.getWriter().write("[");
         for (CartItem cartItem : cartItems) {
+
+            result.add(Json.createObjectBuilder()
+                    .add("name", cartItem.getItemName())
+                    .add("price", cartItem.getPrice())
+            );
+
             resp.getWriter().write("{");
             resp.getWriter().write("\"itemName\":\"" + cartItem.getItemName() + "\"");
             resp.getWriter().write("\"price\":\"" + cartItem.getPrice() + "\"");
             resp.getWriter().write("}");
         }
         resp.getWriter().write("]");
+        result.build().toString();
 
     }
 }
