@@ -5,6 +5,7 @@ import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.glassfish.jersey.servlet.ServletContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +44,11 @@ public class WebshopServer {
         }
 
 
-        webContext.addServlet(new ServletHolder(new ListCartServlet()),"/api/cart");
+        //webContext.addServlet(new ServletHolder(new ListCartServlet()),"/api/cart");
+
+        ServletHolder jerseyServlet = webContext.addServlet(ServletContainer.class, "/api/*");
+        jerseyServlet.setInitOrder(0);
+        jerseyServlet.setInitParameter("jersey.config.server.provider.packages", "no.kristiania.webshop");
 
         return webContext;
 

@@ -24,8 +24,8 @@ public class ListCartServlet extends HttpServlet {
         for (CartItem cartItem : cartItems) {
 
             result.add(Json.createObjectBuilder()
-                    .add("name", cartItem.getItemName())
-                    .add("price", cartItem.getPrice())
+                    .add("itemName", cartItem.getItemName())
+                    .add("itemPrice", cartItem.getPrice())
             );
 
 

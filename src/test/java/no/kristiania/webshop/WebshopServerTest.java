@@ -1,5 +1,6 @@
 package no.kristiania.webshop;
 
+import jakarta.json.Json;
 import org.eclipse.jetty.server.Server;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,8 @@ import java.nio.charset.StandardCharsets;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WebshopServerTest {
+
+    private WebshopServer server;
 
     @BeforeEach
     void setUp() throws Exception {
@@ -46,5 +49,28 @@ public class WebshopServerTest {
     //cannot resolve server for some reason
     private HttpURLConnection openConnection(String spec) throws IOException{
         return (HttpURLConnection) new URL(server.getURL(), spec).openConnection();
+    }
+
+    @Test
+    void shouldAddCartItems() throws IOException {
+        var postConnection = openConnection("/api/books");
+        postConnection.setRequestMethod("POST");
+        postConnection.getOutputStream().write(
+                Json.createObjectBuilder()
+                        .add("itemName", "Example ItemName")
+                        .add("itemPrice", "Example ItemPrice")
+                        .build()
+                        .toString()
+                        .getBytes(StandardCharsets.UTF_8)
+        );
+
+        assertThat(postConnection.getResponseCode())
+                .as(postConnection.getResponseMessage() + " for " + postConnection.getURL())
+                .isEqualTo(200);
+
+        var connection = openConnection("/api/books");
+        assertThat(connection.getInputStream())
+                .asString(StandardCharsets.UTF_8)
+                .contains("{\"itemName\":\"Example ItemName\"");
     }
 }
