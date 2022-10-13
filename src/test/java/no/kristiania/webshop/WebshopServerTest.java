@@ -40,7 +40,7 @@ public class WebshopServerTest {
                 .isEqualTo(200);
         assertThat(connection.getInputStream())
                 .asString(StandardCharsets.UTF_8)
-                .contains("{\"title\":\"Java in a nutshell\"");
+                .contains("{\"title\":\"Java Webshop\"");
     }
 
     //cannot resolve server for some reason
