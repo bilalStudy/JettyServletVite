@@ -21,7 +21,6 @@ public class ListCartServlet extends HttpServlet {
         var cartItems = List.of(exampleCartItem);
 
         JsonArrayBuilder result = Json.createArrayBuilder();
-        resp.getWriter().write("[");
         for (CartItem cartItem : cartItems) {
 
             result.add(Json.createObjectBuilder()
@@ -29,13 +28,9 @@ public class ListCartServlet extends HttpServlet {
                     .add("price", cartItem.getPrice())
             );
 
-            resp.getWriter().write("{");
-            resp.getWriter().write("\"itemName\":\"" + cartItem.getItemName() + "\"");
-            resp.getWriter().write("\"price\":\"" + cartItem.getPrice() + "\"");
-            resp.getWriter().write("}");
+
         }
-        resp.getWriter().write("]");
-        result.build().toString();
+        resp.getWriter().write(result.build().toString());
 
     }
 }

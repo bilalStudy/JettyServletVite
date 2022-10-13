@@ -22,7 +22,7 @@ public class WebshopServer {
         WebAppContext webContext = new WebAppContext();
         webContext.setContextPath("/");
         webContext.setBaseResource(Resource.newClassPathResource("/webapp"));
-        webContext.addServlet(new ServletHolder(new ListCartServlet()),"api/cart");
+        webContext.addServlet(new ServletHolder(new ListCartServlet()),"/api/cart");
         server.setHandler(webContext);
 
     }
