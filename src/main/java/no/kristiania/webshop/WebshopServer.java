@@ -21,6 +21,11 @@ public class WebshopServer {
 
     public WebshopServer(int port) throws IOException {
         this.server = new Server(port);
+        server.setHandler(createWebApp());
+
+    }
+
+    private WebAppContext createWebApp() throws IOException {
 
         WebAppContext webContext = new WebAppContext();
         webContext.setContextPath("/");
@@ -39,7 +44,8 @@ public class WebshopServer {
 
 
         webContext.addServlet(new ServletHolder(new ListCartServlet()),"/api/cart");
-        server.setHandler(webContext);
+
+        return webContext;
 
     }
 
