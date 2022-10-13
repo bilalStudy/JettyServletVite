@@ -16,10 +16,10 @@ import java.util.List;
 public class CartItemEndpoint {
 
 
-    private List<CartItem> cartItems = new ArrayList<>();
+    private static final List<CartItem> cartItems = new ArrayList<>();
 
 
-    {
+    static {
         var exampleCartItem = new CartItem();
         exampleCartItem.setItemName("bread");
         exampleCartItem.setPrice(100);
@@ -30,7 +30,7 @@ public class CartItemEndpoint {
         @GET
         public Response getAllCartItems(){
 
-        JsonArrayBuilder result = Json.createArrayBuilder();
+        var result = Json.createArrayBuilder();
         for(var cartItem : cartItems){
             result.add(Json.createObjectBuilder()
                     .add("itemName", cartItem.getItemName())
