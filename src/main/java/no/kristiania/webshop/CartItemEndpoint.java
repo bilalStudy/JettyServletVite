@@ -26,7 +26,6 @@ public class CartItemEndpoint {
         cartItems.add(exampleCartItem);
 
     }
-        @Path("/")
         @GET
         public Response getAllCartItems(){
 
@@ -41,7 +40,7 @@ public class CartItemEndpoint {
         return Response.ok(result.build().toString()).build();
     }
 
-    @Path("/")
+
     @POST
     public Response addBook(String body) {
         JsonObject jsonBook = Json.createReader(new StringReader(body)).readObject();

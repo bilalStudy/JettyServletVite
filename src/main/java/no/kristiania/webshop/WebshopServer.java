@@ -28,10 +28,10 @@ public class WebshopServer {
 
     private WebAppContext createWebApp() throws IOException {
 
-        WebAppContext webContext = new WebAppContext();
+        var webContext = new WebAppContext();
         webContext.setContextPath("/");
 
-        Resource resources = Resource.newClassPathResource("/webapp");
+        var resources = Resource.newClassPathResource("/webapp");
 
         var sourceDirectory = new File(resources.getFile().getAbsoluteFile().toString()
                 .replace('\\', '/')
@@ -46,8 +46,7 @@ public class WebshopServer {
 
         //webContext.addServlet(new ServletHolder(new ListCartServlet()),"/api/cart");
 
-        ServletHolder jerseyServlet = webContext.addServlet(ServletContainer.class, "/api/*");
-        jerseyServlet.setInitOrder(0);
+        var jerseyServlet = webContext.addServlet(ServletContainer.class, "/api/*");
         jerseyServlet.setInitParameter("jersey.config.server.provider.packages", "no.kristiania.webshop");
 
         return webContext;
