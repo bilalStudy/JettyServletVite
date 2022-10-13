@@ -11,8 +11,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WebshopServerTest {
 
     @Test
-    void shouldServeHomePage() throws IOException {
+    void shouldServeHomePage() throws Exception {
         var server = new WebshopServer(0);
+        server.start();
         var connection = (HttpURLConnection) server.getURL().openConnection();
 
         assertThat(connection.getResponseCode())
