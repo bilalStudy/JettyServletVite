@@ -21,8 +21,8 @@ function CartItemList() {
 }
 
 function AddCartItem(){
-    const [title, setTitle] = useState("");
-    const [author, setAuthor] = useState("");
+    const [itemName, setItemName] = useState("");
+    const [itemPrice, setItemPrice] = useState("");
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -37,8 +37,8 @@ function AddCartItem(){
 
     return <div>
         <form onSubmit={handleSubmit}>
-            <div><label>Title: <input type="text" value={title} onChange={e => setTitle(e.target.value)} /></label></div>
-            <div><label>Author: <input type="text" value={author} onChange={e => setAuthor(e.target.value)} /></label></div>
+            <div><label>ItemName: <input type="text" value={itemName} onChange={e => setItemName(e.target.value)} /></label></div>
+            <div><label>ItemPrice: <input type="text" value={itemPrice} onChange={e => setItemPrice(e.target.value)} /></label></div>
             <div>
                 <button>Submit</button>
             </div>
