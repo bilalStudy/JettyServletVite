@@ -7,7 +7,7 @@ function CartItemList() {
 
     useEffect(() => {
         (async () => {
-            const res = await fetch("/api/cart");
+            const res = await fetch("/api/cartItems");
             setCartItems(await res.json());
             setLoading(false);
         })();
@@ -26,7 +26,7 @@ function AddCartItem(){
 
     async function handleSubmit(e) {
         e.preventDefault();
-        await fetch("/api/cart", {
+        await fetch("/api/cartItems", {
             method: "post",
             body: JSON.stringify({itemName, itemPrice}),
             headers: {

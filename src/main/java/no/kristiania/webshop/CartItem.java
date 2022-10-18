@@ -9,16 +9,16 @@ public class CartItem {
         this.itemName = itemName;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
     private String itemName;
-    private int price;
+    private String price;
 
     @Override
     public String toString() {

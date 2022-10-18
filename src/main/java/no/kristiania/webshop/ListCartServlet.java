@@ -16,7 +16,7 @@ public class ListCartServlet extends HttpServlet {
 
         var exampleCartItem = new CartItem();
         exampleCartItem.setItemName("bread");
-        exampleCartItem.setPrice(100);
+        exampleCartItem.setPrice("100");
 
         var cartItems = List.of(exampleCartItem);
 

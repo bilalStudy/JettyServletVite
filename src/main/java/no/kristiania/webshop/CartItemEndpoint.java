@@ -22,7 +22,7 @@ public class CartItemEndpoint {
     static {
         var exampleCartItem = new CartItem();
         exampleCartItem.setItemName("bread");
-        exampleCartItem.setPrice(100);
+        exampleCartItem.setPrice("100");
         cartItems.add(exampleCartItem);
 
     }
@@ -42,12 +42,12 @@ public class CartItemEndpoint {
 
 
     @POST
-    public Response addBook(String body) {
+    public Response addCartItem(String body) {
         JsonObject jsonBook = Json.createReader(new StringReader(body)).readObject();
-        var exampleCartItem = new CartItem();
-        exampleCartItem.setItemName("bread");
-        exampleCartItem.setPrice(100);
-        cartItems.add(exampleCartItem);
+        var cartItem = new CartItem();
+        cartItem.setItemName(jsonBook.getString("itemName"));
+        cartItem.setPrice(jsonBook.getString("itemPrice"));
+        cartItems.add(cartItem);
 
         return Response.ok().build();
     }

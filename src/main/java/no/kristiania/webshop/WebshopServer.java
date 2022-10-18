@@ -45,10 +45,18 @@ public class WebshopServer {
 
 
         //webContext.addServlet(new ServletHolder(new ListCartServlet()),"/api/cart");
-
+/*
         var jerseyServlet = webContext.addServlet(ServletContainer.class, "/api/*");
         jerseyServlet.setInitParameter("jersey.config.server.provider.packages", "no.kristiania.webshop");
 
+
+ */
+        ServletHolder jerseyServlet = webContext.addServlet(
+                org.glassfish.jersey.servlet.ServletContainer.class, "/api/*");
+        jerseyServlet.setInitOrder(0);
+        jerseyServlet.setInitParameter(
+                "jersey.config.server.provider.packages",
+                "no.kristiania.webshop");
         return webContext;
 
     }
