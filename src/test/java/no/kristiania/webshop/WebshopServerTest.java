@@ -69,9 +69,9 @@ public class WebshopServerTest {
                 .as(postConnection.getResponseMessage() + " for " + postConnection.getURL())
                 .isEqualTo(200);
 
-        var connection = openConnection("/api/books");
+        var connection = openConnection("/api/cartItems");
         assertThat(connection.getInputStream())
                 .asString(StandardCharsets.UTF_8)
-                .contains("{\"itemName\":\"Example ItemName\"");
+                .contains("{\"itemName\":\"bread\"");
     }
 }
